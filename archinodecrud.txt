@@ -1,0 +1,50 @@
+const mysql = require('mysql');
+
+const conexion = mysql.createConnection({
+    host: 'localhost',
+    user: 'omar',
+    password: 'omar1234',
+    database: 'sakila'
+});
+
+conexion.connect((err)=>{
+    if(err){
+        throw err;
+    }else{
+        console.log('conexion exitosa');
+    }
+});
+// mostrar
+conexion.query('SELECT  * FROM actor LIMIT 100', function(error, filas){
+    if(error){
+         throw error;
+    }else{
+        filas.forEach(fila => {
+           console.log(fila);
+});
+    }
+});
+
+// insertar
+/*conexion.query('INSERT INTO actor (first_name, last_name, last_update) VALUES ("omar", "Rivera", "2023-11-07 12:00:00")', function(error, results){
+if(error) throw error;
+console.log('Registro Agregado', results)
+});*/
+
+
+// conexion.end();
+// ACTUALIZAR
+/*conexion.query('UPDATE actor SET first_name = "Steve", last_name = "Rogers" WHERE actor_id=6', function(error, results) {
+if (error) throw error;
+console.log('¡Registro Actualizado', results);
+});*/
+
+// ELIMINAR
+/*conexion.query('DELETE FROM actor WHERE id =4;', function(error, results) {
+if (error) throw error;
+console.log('¡Registro Eliminado', results)
+})*/
+conexion.query('DELETE FROM actor WHERE actor_id = 4;', function(error, results) {
+    if (error) throw error;
+    console.log('¡Registro Eliminado', results)
+});
